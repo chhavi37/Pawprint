@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kind Streets 🇮🇳 – A Blog About Indian Stray Animals</title>
+  <meta name="description" content="A simple, emotional, and informative blog about caring for Indian stray dogs & cats—how to help, legal basics, and everyday tips." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#0f1630; --card:#121a3c; --text:#ecf2ff; --muted:#a9b7ff; --ring:#7bb8ff66;
+      --acc1:#ff7a59; /* saffron */
+      --acc2:#2ec07e; /* green */
+      --acc3:#3a86ff; /* india blue */
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .light{ --bg:#f7f9ff; --panel:#ffffff; --card:#ffffff; --text:#0f1530; --muted:#42558f; --shadow:0 8px 22px rgba(16,28,69,.12) }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:
+      radial-gradient(1200px 600px at 110% -10%, color-mix(in oklab,var(--acc3) 70%, transparent) 0%, transparent 60%),
+      radial-gradient(1000px 600px at -10% 110%, color-mix(in oklab,var(--acc2) 70%, transparent) 0%, transparent 55%), var(--bg);
+      color:var(--text);font:16px/1.6 Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
+    .container{max-width:1100px;margin:auto;padding:22px}
+
+    /* header */
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(to bottom, rgba(0,0,0,.45), transparent), var(--bg);}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .paw{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
+      background:conic-gradient(from 180deg, var(--acc1), var(--acc2), var(--acc3)); box-shadow:0 6px 16px #0007}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    .links a{padding:8px 12px;border-radius:12px;color:var(--text);text-decoration:none;opacity:.9}
+    .links a:hover{background:#ffffff15;opacity:1}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid #ffffff2a;text-decoration:none;color:var(--text);background:#ffffff10;box-shadow:var(--shadow)}
+    .btn:active{transform:translateY(1px)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;padding-top:18px}
+    .card{background:linear-gradient(180deg,#ffffff0f,#00000010); border:1px solid #ffffff24; border-radius:20px; box-shadow:var(--shadow)}
+    .pad{padding:22px}
+    h1{font-size:clamp(28px,4.5vw,46px);line-height:1.15;margin:0 0 10px}
+    h2{font-size:clamp(22px,3.3vw,32px);margin:0 0 12px}
+    p{margin:0 0 12px}
+
+    .hero .stats{display:flex;gap:12px;flex-wrap:wrap}
+    .chip{font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid #fff2;background:#ffffff12}
+    .illustration{aspect-ratio:1/1;border-radius:22px;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, #ffffff22, transparent 40%), conic-gradient(from 200deg,var(--acc1),var(--acc2),var(--acc3))}
+    .illustration svg{width:56%;height:56%;fill:#fff9}
+
+    /* main */
+    section{margin:34px 0}
+    .grid{display:grid;gap:16px}
+    @media(min-width:800px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+    @media(min-width:900px){.grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+
+    .callout{border-left:6px solid var(--acc3); padding:12px 14px; background:#ffffff12; border-radius:14px}
+    .tips li{margin:8px 0}
+
+    .toc{display:flex;gap:8px;flex-wrap:wrap}
+    .toc a{font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid #fff2;background:#ffffff10;color:var(--text);text-decoration:none}
+
+    .quote{font-style:italic;background:#ffffff10;border:1px dashed #ffffff40;border-radius:14px;padding:14px}
+
+    /* cards */
+    .help-card{display:flex;flex-direction:column;gap:10px}
+    .help-card .actions{margin-top:auto;display:flex;gap:8px}
+    .tag{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #fff2;background:#ffffff0e}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+
+    /* footer + utility */
+    footer{opacity:.9;text-align:center;margin:40px 0 24px}
+    small{color:var(--muted)}
+
+    /* progress bar */
+    .progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--acc1),var(--acc2),var(--acc3));width:0%;z-index:100}
+    .backtop{position:fixed;right:14px;bottom:18px;display:none}
+
+    /* form */
+    input, textarea{padding:12px 14px;border-radius:12px;border:1px solid #fff2;background:#ffffff0c;color:var(--text)}
+    input:focus, textarea:focus{outline:2px solid var(--ring)}
+    label{font-weight:600}
+
+    /* table */
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:16px}
+    th, td{padding:12px 14px;border-bottom:1px solid #ffffff1e}
+    tr:last-child td{border-bottom:none}
+    thead th{background:#ffffff10;text-align:left}
+  </style>
+</head>
+<body class="light" id="top">
+  <div class="progress" id="progress"></div>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand"><span class="paw" aria-hidden="true">🐾</span> <span>KIND STREETS · INDIA</span></div>
+        <div class="links">
+          <a href="#why">Why It Matters</a>
+          <a href="#how">How to Help</a>
+          <a href="#care">Daily Care</a>
+          <a href="#laws">India Basics</a>
+          <a href="#resources">Resources</a>
+          <button id="theme" class="btn" aria-label="Toggle theme">🌙</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card pad">
+        <h1>Kind Streets 🇮🇳 – A Blog about Indian Stray Animals</h1>
+        <p class="quote">“A city is truly developed when even its smallest residents feel safe.”</p>
+        <p>This blog is for anyone who has ever made eye contact with a street dog or cat and thought, “I wish I could help.” Here’s a simple, practical, and heartfelt guide for life in India—how to be kind, stay safe, and support community animals responsibly.</p>
+        <div class="stats">
+          <span class="chip">Street‑smart, India‑specific</span>
+          <span class="chip">Simple tips you can do today</span>
+          <span class="chip">Love + Responsibility</span>
+        </div>
+        <div class="toc" style="margin-top:10px">
+          <a href="#why">Start: Why</a>
+          <a href="#how">Actions</a>
+          <a href="#care">Seasons</a>
+          <a href="#adopt">Adoption</a>
+          <a href="#laws">Legal</a>
+          <a href="#resources">NGOs</a>
+        </div>
+      </div>
+      <div class="illustration card pad" aria-label="Illustration">
+        <svg viewBox="0 0 24 24" role="img" aria-label="Dog & Cat">
+          <path d="M5 19a3 3 0 0 1 3-3h5a3 3 0 0 1 3 3v2H5zM9 11a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm8 2a2 2 0 1 1 2-2 2 2 0 0 1-2 2z"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="why" class="card pad">
+      <h2>Why It Matters</h2>
+      <p>Stray dogs and cats are part of India’s neighbourhoods. Many survive on leftover food and the kindness of communities. A little structure—clean water, safe feeding spots, sterilisation, and basic first‑aid—can transform lives for them <em>and</em> for us.</p>
+      <div class="callout"><strong>Kindness that works:</strong> regular feeding at fixed times, clean water bowls, supporting Animal Birth Control (ABC) sterilisation drives, and basic vaccinations like anti‑rabies.</div>
+    </section>
+
+    <section id="how">
+      <h2>How You Can Help—Today</h2>
+      <div class="grid cols-3">
+        <article class="card pad help-card">
+          <h3>Feed Right 🍲</h3>
+          <p>Choose simple, safe meals: rice with chicken/egg & a little turmeric, or quality kibble. Avoid spicy/oily foods, fried bones, and sweets. Keep a clean water bowl in a discreet corner.</p>
+          <div class="tags"><span class="tag">Fixed time & spot</span><span class="tag">Clean area</span><span class="tag">Water daily</span></div>
+        </article>
+        <article class="card pad help-card">
+          <h3>First‑Aid Basics ⛑️</h3>
+          <p>Minor wounds: gently flush with clean water or saline, apply povidone‑iodine, keep the area dry. Avoid human painkillers—they can be dangerous. For limping, deep wounds, fever, or maggots, call an NGO/vet.</p>
+          <div class="tags"><span class="tag">Saline + Betadine</span><span class="tag">No human meds</span></div>
+        </article>
+        <article class="card pad help-card">
+          <h3>Support ABC & Vaccination 💉</h3>
+          <p>Help your local dogs/cats get sterilised (ABC) and vaccinated (Anti‑rabies, 7‑in‑1 for dogs; ARV & FVRCP for cats). Mark and record their details to maintain a stable, healthy community.</p>
+          <div class="tags"><span class="tag">Contact local NGO</span><span class="tag">Post‑op care</span></div>
+        </article>
+        <article class="card pad help-card">
+          <h3>Be a Responsible Feeder 🤝</h3>
+          <p>Feed at non‑traffic spots, keep it tidy, don’t block doorways. Speak calmly to neighbours; invite them to help. Clean up leftovers to avoid complaints and keep animals safe.</p>
+        </article>
+        <article class="card pad help-card">
+          <h3>Build Trust 🐶🐱</h3>
+          <p>Approach sideways, crouch, avoid direct staring. Offer food on the ground, not from your hand initially. Let them sniff first. Slow blinking calms cats!</p>
+        </article>
+        <article class="card pad help-card">
+          <h3>Report Cruelty 📲</h3>
+          <p>If you witness cruelty, record safely (video/photo), note date/time/location, and call your city’s animal NGO or local police. Stay calm; your documentation helps intervention.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="care" class="card pad">
+      <h2>Daily & Seasonal Care in India</h2>
+      <div class="grid cols-2">
+        <div>
+          <h3>Summer ☀️</h3>
+          <ul class="tips">
+            <li>Place water bowls in shade; refresh twice daily.</li>
+            <li>Avoid walking/feeding on hot tar roads at noon—paws burn.</li>
+            <li>Heat stress signs: heavy panting, drooling, red tongue—shift to shade, dab cool (not icy) water on paws & belly.</li>
+          </ul>
+          <h3>Monsoon 🌧️</h3>
+          <ul class="tips">
+            <li>Keep dry shelters (corrugated sheet/cardboard corner) where allowed.</li>
+            <li>Watch for fungal skin issues; keep coats dry.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Winter 🧣</h3>
+          <ul class="tips">
+            <li>Provide old blankets/jute sacks; avoid open draughts.</li>
+            <li>Puppies & seniors need extra warmth and calories.</li>
+          </ul>
+          <h3>Hygiene 🧼</h3>
+          <ul class="tips">
+            <li>Disinfect feeding spots weekly; don’t leave leftovers.</li>
+            <li>Use deworming (as advised by a vet/NGO) and keep a simple record.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="adopt">
+      <h2>Adoption: From Street to Home 🏠</h2>
+      <div class="grid cols-3">
+        <article class="card pad">
+          <h3>1) Temperament & Health Check</h3>
+          <p>Observe for a few days. A friendly, stable dog/cat that seeks people adapts well. Get a basic vet check, deworming, and ARV shot.</p>
+        </article>
+        <article class="card pad">
+          <h3>2) Foster → Forever</h3>
+          <p>Start with foster care to learn routines. Share clear photos/videos and write a true story about the animal’s nature—kind yet honest.</p>
+        </article>
+        <article class="card pad">
+          <h3>3) Home‑Ready</h3>
+          <p>Vaccination card, sterilisation appointment, ID tag, microchip (where available), and an adoption agreement through an NGO for accountability.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="laws" class="card pad">
+      <h2>India Basics: Rights & Responsibilities</h2>
+      <ul class="tips">
+        <li>Feeding community animals kindly and cleanly is widely recognised; be respectful of neighbours and keep the area tidy.</li>
+        <li>Relocating community dogs is discouraged; stable, sterilised groups reduce conflicts.</li>
+        <li><strong>If issues arise</strong>: talk to your Resident Welfare Association (RWA) or local municipal veterinary officer; propose fixed feeding spots and ABC drives.</li>
+        <li>In cruelty situations, you can seek help from local NGOs or police. Maintain calm, factual records.</li>
+      </ul>
+      <p class="callout">Note: Regulations can vary by city/municipality. For exact legal steps, contact your local animal welfare board/NGO or municipal veterinary department.</p>
+    </section>
+
+    <section id="resources">
+      <h2>Useful Indian Resources</h2>
+      <div class="grid cols-2">
+        <div class="card pad">
+          <h3>Major NGOs (examples)</h3>
+          <ul class="tips">
+            <li>Blue Cross of India (Chennai)</li>
+            <li>Friendicoes SECA (Delhi NCR)</li>
+            <li>RESQ Charitable Trust (Pune)</li>
+            <li>CUPA (Bengaluru)</li>
+            <li>Welfare for Stray Dogs – WSD (Mumbai)</li>
+            <li>PAWS (Thane) • PFA units in many cities</li>
+          </ul>
+        </div>
+        <div class="card pad">
+          <h3>Simple Records Template</h3>
+          <table>
+            <thead><tr><th>Area/Block</th><th>Animal</th><th>Sterilised?</th><th>ARV date</th><th>Notes</th></tr></thead>
+            <tbody id="records">
+              <tr><td>A‑3 Park</td><td>Brown male dog</td><td>✅</td><td>2025‑07‑10</td><td>Ear notch left</td></tr>
+              <tr><td>A‑3 Park</td><td>White‑tabby cat</td><td>❌</td><td>—</td><td>Friendly, needs FVRCP</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px" class="grid cols-2">
+            <input id="newRow" placeholder="Add quick note e.g., C‑1 lane | black female dog | sterilised" />
+            <button class="btn" id="addRow">Add to Notes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="share" class="card pad">
+      <h2>Share & Comment</h2>
+      <div class="grid cols-2">
+        <div>
+          <p>Found this useful? Share the blog with your neighbours’ WhatsApp group and start a small kindness circle on your street.</p>
+          <div class="grid">
+            <button class="btn" id="copyLink">Copy Blog Link</button>
+            <button class="btn" id="shareBtn">Share via Web Share</button>
+          </div>
+        </div>
+        <div>
+          <form id="commentForm" class="grid">
+            <label for="cname">Your Name</label>
+            <input id="cname" placeholder="e.g., Aditi from Indore" />
+            <label for="cmsg">Your Tip / Story</label>
+            <textarea id="cmsg" rows="4" placeholder="How did you help a community animal?" ></textarea>
+            <button class="btn" type="submit">Post Comment (local)</button>
+          </form>
+          <div id="comments" class="grid" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container">
+      <small>© <span id="year"></span> Kind Streets • Made in India with ❤ • <a href="#top" style="color:inherit">Back to top</a></small>
+      <button class="btn backtop" id="backtop">↑</button>
+    </footer>
+  </main>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('theme');
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'dark') document.body.classList.remove('light');
+    themeBtn.addEventListener('click', ()=>{
+      const isLight = document.body.classList.toggle('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeBtn.textContent = isLight ? '🌙' : '☀️';
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reading progress
+    const progress = document.getElementById('progress');
+    document.addEventListener('scroll', ()=>{
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight) * 100; 
+      progress.style.width = scrolled + '%';
+      document.getElementById('backtop').style.display = h.scrollTop > 400 ? 'inline-flex' : 'none';
+    });
+    document.getElementById('backtop').onclick = ()=>window.scrollTo({top:0, behavior:'smooth'});
+
+    // Records quick‑add (local, simple parser)
+    const addRowBtn = document.getElementById('addRow');
+    addRowBtn?.addEventListener('click', ()=>{
+      const v = document.getElementById('newRow').value.trim();
+      if(!v) return;
+      const parts = v.split('|').map(s=>s.trim());
+      const tr = document.createElement('tr');
+      const tds = [parts[0]||'-', parts[1]||'-', '—', '—', parts[2]||'Added'];
+      tds.forEach(t=>{ const td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });
+      document.getElementById('records').appendChild(tr);
+      document.getElementById('newRow').value = '';
+    });
+
+    // Comments (localStorage only)
+    const key = 'kindstreets_comments';
+    const list = document.getElementById('comments');
+    const render = () => {
+      list.innerHTML = '';
+      const data = JSON.parse(localStorage.getItem(key) || '[]');
+      data.forEach(c => {
+        const d = document.createElement('div');
+        d.className = 'card pad';
+        d.innerHTML = `<b>${c.name}</b><p>${c.msg}</p>`;
+        list.appendChild(d);
+      });
+    };
+    render();
+
+    document.getElementById('commentForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('cname').value.trim() || 'Anonymous';
+      const msg = document.getElementById('cmsg').value.trim();
+      if(!msg) return;
+      const data = JSON.parse(localStorage.getItem(key) || '[]');
+      data.unshift({name, msg, at: Date.now()});
+      localStorage.setItem(key, JSON.stringify(data));
+      document.getElementById('cmsg').value='';
+      render();
+    });
+
+    // Share helpers
+    const link = location.href;
+    document.getElementById('copyLink').onclick = async ()=>{
+      try{ await navigator.clipboard.writeText(link); alert('Link copied! Share on WhatsApp.'); }
+      catch{ prompt('Copy this link:', link); }
+    };
+    document.getElementById('shareBtn').onclick = async ()=>{
+      if(navigator.share){ await navigator.share({title:document.title, text:'A simple Indian guide for community animals', url:link}); }
+      else{ alert('Share not supported on this browser. Link copied.'); navigator.clipboard.writeText(link); }
+    };
+
+    // Fade‑in on scroll
+    const show = (el)=>{ el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    document.querySelectorAll('.card').forEach(c=>{ c.style.opacity='.0'; c.style.transform='translateY(10px)'; });
+    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) show(e.target); }); }, {threshold:.1, rootMargin:'0px 0px -5%' });
+    document.querySelectorAll('.card').forEach(c=>io.observe(c));
+  </script>
+</body>
+</html>
